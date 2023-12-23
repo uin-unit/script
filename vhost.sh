@@ -52,7 +52,7 @@ firewalld() {
   CHECK2="172.27.5.71" &&
   CHECK2="172.27.5.72" &&
 
-  if [[ "$SOURCE1" == *"$CHECK1"* ]]; then
+  if [[ "$SOURCE1" =~ $CHECK1 ]]; then
     echo "Firewall zone coresys is configured";
   else
     sudo firewall-cmd --permanent --zone="coresys" --add-source=172.27.5.81/24 &&
@@ -62,7 +62,7 @@ firewalld() {
   fi
 
 
-  if [[ "$SOURCE2" == *"$CHECK2"* ]]; then
+  if [[ "$SOURCE2" =~ $CHECK2 ]]; then
     echo "Firewall zone coresys first admin is configured";
   else
     sudo firewall-cmd --permanent --zone="sysadm" --add-source=172.27.5.71/24 &&
