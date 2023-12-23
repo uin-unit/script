@@ -31,14 +31,8 @@ grub2() {
 firewalld() {
 
   CORESYS=$(firewall-cmd --get-active-zones | grep "coresys" | wc -c ) &&
-  SYSADMS=$(firewall-cmd --get-active-zones | grep "sysadm" | wc -c ) &&
-  SOURCE1=$(firewall-cmd --zone=coresys --list-all | grep "sources") &&
-  SOURCE2=$(firewall-cmd --zone=sysadm --list-all | grep "sources") &&
-  CHECK1="172.27.5.81" &&
-  CHECK2="172.27.5.71" &&
-  CHECK2="172.27.5.72" &&
-
-
+  SYSADMS=$(firewall-cmd --get-active-zones | grep "sysadm" | wc -c 
+  
   if [ $CORESYS -gt 0 ]; then
     echo "zone exist";
   else
@@ -50,6 +44,14 @@ firewalld() {
   else
     sudo firewall-cmd --permanent --new-zone=sysadm;
   fi
+
+
+  SOURCE1=$(firewall-cmd --zone=coresys --list-all | grep "sources") &&
+  SOURCE2=$(firewall-cmd --zone=sysadm --list-all | grep "sources") &&
+  CHECK1="172.27.5.81" &&
+  CHECK2="172.27.5.71" &&
+  CHECK2="172.27.5.72" &&
+
 
 
   if [[ "$SOURCE1" == *"$CHECK1"* ]]; then
