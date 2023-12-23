@@ -3,9 +3,10 @@
 insight() {
 
   STATUS=$(insights-client --status);
-  CHECKS="Registered at"
-
-  if [[ "$STATUS" == *"$CHECKS"* ]]; then
+  CHECKS=$( grep -Rnw $STATUS -e 'Registered a' )
+  
+  
+  if [[ $STATUS" -gt 0  ]]; then
     echo "System is Registered"
   else
     sudo insights-client --register;
