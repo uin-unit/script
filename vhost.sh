@@ -20,7 +20,7 @@ grub2() {
   if [[ "$STRING" == *"$CHECKS"* ]]; then
     echo "OS Prober disable"
   else
-    echo "GRUB_DISABLE_OS_PROBER=true" >> /etc/default/grub;
+    echo "GRUB_DISABLE_OS_PROBER=true" >> /etc/default/grub
   fi
 
   sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub &&
