@@ -32,7 +32,8 @@ firewalld() {
 
   CORESYS=$(firewall-cmd --get-active-zones | grep "coresys" | wc -c ) &&
   SYSADMS=$(firewall-cmd --get-active-zones | grep "sysadm" | wc -c ) &&
-  SOURCE=$(firewall-cmd --zone=manage --list-all | grep "sources") &&
+  SOURCE1=$(firewall-cmd --zone=coresys --list-all | grep "sources") &&
+  SOURCE2=$(firewall-cmd --zone=sysadm --list-all | grep "sources") &&
   CHECK1="172.27.5.81" &&
   CHECK2="172.27.5.71" &&
   CHECK2="172.27.5.72" &&
@@ -51,7 +52,7 @@ firewalld() {
   fi
 
 
-  if [[ "$SOURCE" == *"$CHECK1"* ]]; then
+  if [[ "$SOURCE1" == *"$CHECK1"* ]]; then
     echo "Firewall zone coresys is configured";
   else
     sudo firewall-cmd --permanent --zone="coresys" --add-source=172.27.5.81/24 &&
@@ -61,7 +62,7 @@ firewalld() {
   fi
 
 
-  if [[ "$SOURCE" == *"$CHECK2"* ]]; then
+  if [[ "$SOURCE2" == *"$CHECK2"* ]]; then
     echo "Firewall zone coresys first admin is configured";
   else
     sudo firewall-cmd --permanent --zone="sysadm" --add-source=172.27.5.71/24 &&
@@ -70,7 +71,7 @@ firewalld() {
   fi
 
 
-  if [[ "$SOURCE" == *"$CHECK3"* ]]; then
+  if [[ "$SOURCE2" == *"$CHECK3"* ]]; then
     echo "Firewall zone coresys second admin is configured";
   else
     sudo firewall-cmd --permanent --zone="sysadm" --add-source=172.27.5.72/24;
