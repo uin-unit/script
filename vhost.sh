@@ -66,16 +66,11 @@ firewalld() {
     echo "Firewall zone coresys first admin is configured";
   else
     sudo firewall-cmd --permanent --zone="sysadm" --add-source=172.27.5.71/24 &&
+    sudo firewall-cmd --permanent --zone="sysadm" --add-source=172.27.5.72/24 &&
     sudo firewall-cmd --permanent --zone="sysadm" --remove-service=cockpit &&
     sudo firewall-cmd --permanent --zone="sysadm" --add-service=https;
   fi
 
-
-  if [[ "$SOURCE2" == *"$CHECK3"* ]]; then
-    echo "Firewall zone coresys second admin is configured";
-  else
-    sudo firewall-cmd --permanent --zone="sysadm" --add-source=172.27.5.72/24;
-  fi
 
   sudo firewall-cmd --reload;
 }
