@@ -31,7 +31,7 @@ grub2() {
 firewalld() {
 
   CORESYS=$(firewall-cmd --get-active-zones | grep "coresys" | wc -c ) &&
-  SYSADMS=$(firewall-cmd --get-active-zones | grep "sysadm" | wc -c 
+  SYSADMS=$(firewall-cmd --get-active-zones | grep "sysadm" | wc -c ) &&
   
   if [ $CORESYS -gt 0 ]; then
     echo "zone exist";
