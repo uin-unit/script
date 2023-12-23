@@ -3,7 +3,7 @@
 insight() {
 
   STATUS=$(insights-client --status);
-  CHECKS=$( grep -Rnw $STATUS -e 'Registered a' )
+  CHECKS=$(grep -Rnw $STATUS -e 'Registered a')
   
   
   if [[ $STATUS -gt 0  ]]; then
