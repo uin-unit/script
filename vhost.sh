@@ -52,8 +52,6 @@ firewalld() {
   CHECK2="172.27.5.71" &&
   CHECK2="172.27.5.72" &&
 
-
-
   if [[ "$SOURCE1" == *"$CHECK1"* ]]; then
     echo "Firewall zone coresys is configured";
   else
