@@ -84,13 +84,13 @@ cockpit() {
   if [ -d "/etc/systemd/system/cockpit.socket.d/" ]; then
     echo "cockpit socket directory exist";
   else
-    mkdir /etc/systemd/system/cockpit.socket.d/;
+    mkdir /etc/systemd/system/cockpit.socket.d/
   fi
 
   if [ -f "/etc/systemd/system/cockpit.socket.d/listen.conf" ]; then
     echo "cockpit listen config exist";
   else
-    touch /etc/systemd/system/cockpit.socket.d/listen.conf;
+    touch /etc/systemd/system/cockpit.socket.d/listen.conf
   fi
 
   if [ -f "/etc/cockpit/cockpit.conf" ]; then
