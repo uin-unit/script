@@ -37,40 +37,21 @@ firewalld() {
     echo "zone exist";
   else
     sudo firewall-cmd --permanent --new-zone=coresys;
-  fi
-
-  if [ $SYSADMS -gt 0 ]; then
-    echo "zone exist";
-  else
-    sudo firewall-cmd --permanent --new-zone=sysadm;
-  fi
-
-
-  SOURCE1=$(firewall-cmd --zone=coresys --list-all | grep "sources") &&
-  SOURCE2=$(firewall-cmd --zone=sysadm --list-all | grep "sources") &&
-  CHECK1="172.27.5.81" &&
-  CHECK2="172.27.5.71" &&
-  CHECK2="172.27.5.72" &&
-
-  if [[ "$SOURCE1" =~ $CHECK1 ]]; then
-    echo "Firewall zone coresys is configured";
-  else
     sudo firewall-cmd --permanent --zone="coresys" --add-source=172.27.5.81/24 &&
     sudo firewall-cmd --permanent --zone="coresys" --remove-service=cockpit &&
     sudo firewall-cmd --permanent --zone="coresys" --add-service=ssh &&
     sudo firewall-cmd --permanent --zone="coresys" --add-service=https;
   fi
 
-
-  if [[ "$SOURCE2" =~ $CHECK2 ]]; then
-    echo "Firewall zone coresys first admin is configured";
+  if [ $SYSADMS -gt 0 ]; then
+    echo "zone exist";
   else
+    sudo firewall-cmd --permanent --new-zone=sysadm;
     sudo firewall-cmd --permanent --zone="sysadm" --add-source=172.27.5.71/24 &&
     sudo firewall-cmd --permanent --zone="sysadm" --add-source=172.27.5.72/24 &&
     sudo firewall-cmd --permanent --zone="sysadm" --remove-service=cockpit &&
     sudo firewall-cmd --permanent --zone="sysadm" --add-service=https;
   fi
-
 
   sudo firewall-cmd --reload;
 }
