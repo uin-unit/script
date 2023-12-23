@@ -82,6 +82,8 @@ firewalld() {
 
 cockpit() {
 
+  sudo systemctl enable --now cockpit.socket &&
+
   if [ -d "/etc/systemd/system/cockpit.socket.d/" ]; then
     echo "cockpit socket directory exist";
   else
